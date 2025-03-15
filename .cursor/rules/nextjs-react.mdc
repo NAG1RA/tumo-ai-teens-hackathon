@@ -1,0 +1,82 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Next.js and React Best Practices
+
+## Next.js App Router
+
+### File-Based Routing
+- Pages are defined by the file structure in the `/app` directory
+- `page.tsx` files define routes
+- `layout.tsx` files define layouts that wrap pages
+- `loading.tsx` files define loading states
+- `error.tsx` files define error states
+
+### Server vs Client Components
+- Server Components (default):
+  - Cannot use hooks or browser APIs
+  - Can directly access backend resources
+  - Better performance for static content
+
+- Client Components (with `'use client'` directive):
+  - Can use hooks and browser APIs
+  - Required for interactive elements
+  - Use sparingly for better performance
+
+### Data Fetching
+- Use React Server Components for data fetching when possible
+- For client components, use SWR or React Query
+- Implement proper loading and error states
+
+## React Patterns
+
+### Component Structure
+- Keep components small and focused
+- Use composition over inheritance
+- Extract reusable logic into custom hooks
+
+### State Management
+- Use React's built-in state management (useState, useReducer) for simple state
+- Consider context API for shared state
+- Avoid prop drilling by using context or composition
+
+### Performance Optimization
+- Use React.memo for expensive renders
+- Implement proper dependency arrays in useEffect and useMemo
+- Use dynamic imports for code splitting
+
+## Tailwind CSS Guidelines
+
+### Utility-First Approach
+- Use Tailwind's utility classes directly in JSX
+- Create consistent spacing and sizing using Tailwind's scale
+- Use Tailwind's color palette for consistency
+
+### Component Classes
+- Extract repeated class combinations into components
+- Use consistent class ordering (layout → typography → visual)
+- Consider using Tailwind's @apply for complex components
+
+### Responsive Design
+- Use Tailwind's responsive prefixes (sm:, md:, lg:, xl:)
+- Design mobile-first, then add breakpoints
+- Test on multiple screen sizes
+
+## TypeScript Best Practices
+
+### Type Definitions
+- Define interfaces and types in separate files when reused
+- Use proper TypeScript types for all components and functions
+- Avoid using `any` type
+
+### Props Typing
+- Define prop types using interfaces
+- Use optional properties with `?` when appropriate
+- Consider using discriminated unions for complex props
+
+### API Response Typing
+- Define types for API responses
+- Use zod for runtime validation when needed
+- Handle edge cases in type definitions 

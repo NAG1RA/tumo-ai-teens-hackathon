@@ -1,0 +1,59 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Next.js OpenAI Application Rules
+
+## Project Overview
+This is a Next.js application that integrates with OpenAI. The project uses the AI SDK for React and follows the App Router pattern.
+
+## Technology Stack
+- **Framework**: Next.js (App Router)
+- **UI**: React with Tailwind CSS
+- **AI Integration**: AI SDK (@ai-sdk/*)
+- **Language**: TypeScript
+
+## Project Structure
+- `/app`: Main application code (Next.js App Router)
+  - `/api`: API routes for AI functionality
+  - `/generate-image`: Image generation example
+- `/public`: Static assets
+
+## Development Guidelines
+
+### API Keys
+- Environment variables should be stored in `.env.local`
+- Required API keys:
+  - `OPENAI_API_KEY` - For OpenAI API access
+  - Additional keys may be needed for other AI providers
+
+### Component Structure
+- Use client components with the `'use client'` directive for interactive elements
+- Keep AI logic separate from UI components when possible
+- Follow React best practices for state management
+
+### API Routes
+- API routes should be placed in the `/app/api` directory
+- Each AI feature should have its own dedicated API route
+
+### Styling
+- Use Tailwind CSS for styling components
+- Follow a consistent design pattern across the application
+
+### TypeScript
+- Use proper TypeScript types for all components and functions
+- Leverage the type definitions provided by the AI SDK
+
+### Error Handling
+- Implement proper error handling for AI API calls
+- Provide user-friendly error messages
+
+## Common Patterns
+- Use the `useChat` hook for chat-based interactions
+- Handle file attachments with proper UI feedback
+
+## Performance Considerations
+- Implement proper loading states for AI operations
+- Consider streaming responses for better user experience
+- Optimize image handling for AI-generated content 

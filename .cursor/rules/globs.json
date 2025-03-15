@@ -1,0 +1,34 @@
+{
+  "rules": [
+    {
+      "name": "main",
+      "globs": ["**/*"],
+      "path": "./main.mdc"
+    },
+    {
+      "name": "project",
+      "globs": ["**/*"],
+      "path": "./project.mdc"
+    },
+    {
+      "name": "ai-integration",
+      "globs": [
+        "app/api/**/*.ts",
+        "app/api/**/*.tsx",
+        "**/useChat.ts",
+        "**/useCompletion.ts"
+      ],
+      "path": "./ai-integration.mdc"
+    },
+    {
+      "name": "nextjs-react",
+      "globs": [
+        "app/**/*.tsx",
+        "app/**/*.ts",
+        "components/**/*.tsx",
+        "components/**/*.ts"
+      ],
+      "path": "./nextjs-react.mdc"
+    }
+  ]
+} 

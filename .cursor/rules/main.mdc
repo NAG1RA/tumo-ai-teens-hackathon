@@ -1,0 +1,48 @@
+---
+description: main project rules
+globs: 
+alwaysApply: false
+---
+
+# Next.js OpenAI Application
+
+This is the main cursor rule file for the Next.js OpenAI application. It provides an overview of the project and references to more specific rule files.
+
+## Project Overview
+
+This is a Next.js application that integrates with various AI providers including OpenAI, Anthropic, and others. The project uses the AI SDK for React and follows the App Router pattern.
+
+## Rule Files
+
+The following rule files provide more detailed guidelines for specific aspects of the project:
+
+- [Project Structure and Guidelines](mdc:project.mdc) - Overall project structure and general development guidelines
+- [AI Integration Guidelines](mdc:ai-integration.mdc) - Specific guidelines for working with AI providers and the AI SDK
+- [Next.js and React Best Practices](mdc:nextjs-react.mdc) - Best practices for Next.js App Router and React development
+
+## Getting Started
+
+1. Clone the repository
+2. Copy `.env.local.template` to `.env.local` and add your API keys
+3. Run `npm install` to install dependencies
+4. Run `npm run dev` to start the development server
+
+## Key Files and Directories
+
+- `/app/page.tsx` - Main application page
+- `/app/api/` - API routes for AI functionality
+- `/app/layout.tsx` - Root layout component
+
+## Environment Variables
+
+Required environment variables:
+- `OPENAI_API_KEY` - OpenAI API key
+- Additional keys may be required for other AI providers
+
+## Additional Resources
+
+- [Next.js Documentation](mdc:https:/nextjs.org/docs)
+- [AI SDK Documentation](mdc:https:/sdk.vercel.ai/docs)
+- [Tailwind CSS Documentation](mdc:https:/tailwindcss.com/docs)
+- [TypeScript Documentation](mdc:https:/www.typescriptlang.org/docs)
+

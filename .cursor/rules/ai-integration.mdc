@@ -1,0 +1,82 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# AI Integration Guidelines
+
+## AI SDK Usage
+
+### Available AI Providers
+The project is set up to work with multiple AI providers:
+- OpenAI (`@ai-sdk/openai`)
+
+### React Hooks
+- `useChat`: For chat-based interactions
+  ```typescript
+  const { messages, input, handleSubmit, handleInputChange, status } = useChat({
+    api: '/api/chat',
+  });
+  ```
+
+- `useCompletion`: For completion-based interactions
+  ```typescript
+  const { completion, input, handleSubmit, handleInputChange, status } = useCompletion({
+    api: '/api/completion',
+  });
+  ```
+
+### API Route Structure
+API routes should follow this pattern:
+```typescript
+import { OpenAI } from '@ai-sdk/openai';
+import { StreamingTextResponse, AIStream } from 'ai';
+
+export const runtime = 'edge';
+
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+  
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY!,
+  });
+
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4',
+    messages,
+    stream: true,
+  });
+
+  const stream = AIStream(response);
+  return new StreamingTextResponse(stream);
+}
+```
+
+### File Attachments
+When handling file attachments:
+1. Use the `experimental_attachments` property
+2. Process images and text files appropriately
+3. Implement proper UI feedback for upload status
+
+### Error Handling
+Implement proper error handling for AI API calls:
+```typescript
+try {
+  // AI API call
+} catch (error) {
+  console.error('Error calling AI API:', error);
+  // Handle error appropriately
+}
+```
+
+## Best Practices
+
+### API Key Management
+- Never hardcode API keys
+- Use environment variables for all API keys
+- Include all required keys in `.env.local.template`
+
+### Response Streaming
+- Use streaming responses for better user experience
+- Implement proper UI feedback during streaming
+- Handle streaming errors gracefully
