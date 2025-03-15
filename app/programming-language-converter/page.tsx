@@ -72,7 +72,7 @@ Only return the JSON object, nothing else.`;
       }
     } catch (error) {
       console.error('Error converting code:', error);
-      alert(`Sorry, there was an error converting your code: ${error.message}`);
+      alert(`Sorry, there was an error converting your code: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setIsConverting(false);
     }

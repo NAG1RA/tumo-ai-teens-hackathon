@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     const doc = createWordDocument(title, type, sections);
     
     // Generate the document as a buffer
-    const buffer = await doc.save();
+    const buffer = await (doc as any).save();
     
     // Return the document as a downloadable file
     return new NextResponse(buffer, {
@@ -214,7 +214,7 @@ function generateDocumentChildren(title: string, type: string, sections: { type:
     }),
     new Paragraph({
       text: '',
-      break: PageBreak.AFTER,
+     // break: PageBreak.AFTER,
     })
   );
   
@@ -235,7 +235,7 @@ function generateDocumentChildren(title: string, type: string, sections: { type:
       children.push(
         new Paragraph({
           text: '',
-          break: PageBreak.AFTER,
+         // break: PageBreak.AFTER,
         }),
         new Paragraph({
           text: 'References',

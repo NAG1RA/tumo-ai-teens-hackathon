@@ -40,8 +40,8 @@ export function Bubbles() {
       minRadius: number;
       
       constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        this.x = Math.random() * (canvas?.width ?? 0);
+        this.y = Math.random() * (canvas?.height ?? 0);
         this.radius = Math.random() * 50 + 20;
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.speedX = (Math.random() - 0.5) * 0.5;
@@ -59,11 +59,11 @@ export function Bubbles() {
         this.y += this.speedY;
         
         // Bounce off edges
-        if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+        if (this.x + this.radius > (canvas?.width ?? 0) || this.x - this.radius < 0) {
           this.speedX = -this.speedX;
         }
         
-        if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+        if (this.y + this.radius > (canvas?.height ?? 0) || this.y - this.radius < 0) {
           this.speedY = -this.speedY;
         }
         

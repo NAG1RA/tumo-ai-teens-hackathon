@@ -121,7 +121,7 @@ export default function AIPartnerPage() {
                 onChange={(e) => setExplanation(e.target.value)}
                 placeholder="Type your explanation here. Try to be clear and thorough..."
                 className={`${styles.messageInput} min-h-[200px] w-full`}
-                disabled={isExplaining && feedback}
+                disabled={isExplaining && feedback ? true : false}
               />
             </div>
 
