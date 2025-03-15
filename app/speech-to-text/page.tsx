@@ -1,6 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { Bubbles } from '../components/Bubbles';
+import styles from '../styles/bubbles.module.css';
+import Link from 'next/link';
 
 // Define TypeScript interfaces for the Web Speech API
 interface SpeechRecognitionResult {
@@ -152,72 +155,98 @@ export default function SpeechTranscriptionPage() {
   };
 
   return (
-    <div className="container mx-auto p-6 max-w-3xl">
-      <h1 className="text-3xl font-bold mb-6">Speech Transcription</h1>
-      
-      <div className="mb-6">
-        <label htmlFor="language" className="block text-sm font-medium mb-2">
-          Select Language
-        </label>
-        <select
-          id="language"
-          value={language}
-          onChange={handleLanguageChange}
-          className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-        >
-          {languageOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
-      
-      <div className="flex space-x-4 mb-6">
-        <button
-          onClick={toggleListening}
-          className={`px-4 py-2 rounded-md font-medium text-white ${
-            isListening 
-              ? 'bg-red-600 hover:bg-red-700' 
-              : 'bg-blue-600 hover:bg-blue-700'
-          }`}
-        >
-          {isListening ? 'Stop Recording' : 'Start Recording'}
-        </button>
+    <>
+      <Bubbles />
+      <div className={styles.pageContainer}>
+        <div className="p-4">
+          <Link href="/">
+            <button className={styles.navButton}>
+              <span className="text-black font-bold">← Back to Home</span>
+            </button>
+          </Link>
+        </div>
         
-        <button
-          onClick={clearTranscript}
-          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md font-medium"
-        >
-          Clear Text
-        </button>
-      </div>
-      
-      <div className="mb-2 flex items-center">
-        <div className="mr-2 font-medium">Status:</div>
-        <div className="flex items-center">
-          <div 
-            className={`w-3 h-3 rounded-full mr-2 ${isListening ? 'bg-red-500 animate-pulse' : 'bg-gray-400'}`}
-          />
-          {isListening ? 'Listening...' : 'Not listening'}
+        <div className={styles.chatContainer}>
+          <div className="space-y-2 text-center mb-8">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-[#1a4d7c]">
+              Speech to Text
+            </h2>
+            <p className="max-w-[600px] mx-auto text-[#2d8a6b] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Convert your speech into text in real-time
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <div className="mb-6">
+              <label htmlFor="language" className="block text-[#1a4d7c] text-sm font-medium mb-2">
+                Select Language
+              </label>
+              <select
+                id="language"
+                value={language}
+                onChange={handleLanguageChange}
+                className={styles.messageInput}
+              >
+                {languageOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            
+            <div className="flex gap-4 mb-6">
+              <button
+                onClick={toggleListening}
+                className={`${styles.navButton} flex-1`}
+                disabled={isListening}
+              >
+                <span className="text-black font-bold">
+                  {isListening ? '🔄 Recording...' : '🔄 Start Recording'}
+                </span>
+              </button>
+              
+              <button
+                onClick={clearTranscript}
+                className={`${styles.navButton} flex-1`}
+                disabled={false}
+              >
+                <span className="text-black font-bold">
+                  Clear Text
+                </span>
+              </button>
+            </div>
+            
+            <div className="mb-4 flex items-center bg-white/80 backdrop-blur p-3 rounded-lg">
+              <div className="mr-2 font-medium text-[#1a4d7c]">Status:</div>
+              <div className="flex items-center">
+                <div 
+                  className={`w-3 h-3 rounded-full mr-2 ${isListening ? 'bg-red-500 animate-pulse' : 'bg-gray-400'}`}
+                />
+                <span className={isListening ? 'text-red-500' : 'text-gray-500'}>
+                  {isListening ? 'Listening...' : 'Not listening'}
+                </span>
+              </div>
+            </div>
+            
+            <div className="bg-white/80 backdrop-blur border border-[#1a4d7c]/20 rounded-lg p-4 min-h-[200px] shadow-lg">
+              <p className="whitespace-pre-wrap">
+                {transcript}
+                <span className="text-[#2d8a6b]">{interimTranscript}</span>
+                {!transcript && !interimTranscript && (
+                  <span className="text-gray-400">Transcribed text will appear here...</span>
+                )}
+              </p>
+            </div>
+            
+            <div className="mt-6 text-sm text-[#2d8a6b]">
+              <p>Note: For best results, speak clearly and use a good microphone.</p>
+              <p>The Web Speech API may require permission to access your microphone.</p>
+            </div>
+          </div>
         </div>
       </div>
-      
-      <div className="border border-gray-300 rounded-md p-4 min-h-[200px] bg-white">
-        <p className="whitespace-pre-wrap">
-          {transcript}
-          <span className="text-gray-400">{interimTranscript}</span>
-          {!transcript && !interimTranscript && (
-            <span className="text-gray-400">Transcribed text will appear here...</span>
-          )}
-        </p>
-      </div>
-      
-      <div className="mt-6 text-sm text-gray-500">
-        <p>Note: For best results, speak clearly and use a good microphone.</p>
-        <p>The Web Speech API may require permission to access your microphone.</p>
-      </div>
-    </div>
+    </>
   );
 }
 
